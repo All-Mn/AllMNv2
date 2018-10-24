@@ -1,5 +1,5 @@
 // Copyright (c) 2011-2015 The Bitcoin Core developers
-// Copyright (c) 2014-2017 The ALMN Core developers
+// Copyright (c) 2014-2017 The ALLMN Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -19,9 +19,9 @@ BitcoinUnits::BitcoinUnits(QObject *parent):
 QList<BitcoinUnits::Unit> BitcoinUnits::availableUnits()
 {
     QList<BitcoinUnits::Unit> unitlist;
-    unitlist.append(ALMN);
-    unitlist.append(mALMN);
-    unitlist.append(uALMN);
+    unitlist.append(ALLMN);
+    unitlist.append(mALLMN);
+    unitlist.append(uALLMN);
     unitlist.append(duffs);
     return unitlist;
 }
@@ -30,9 +30,9 @@ bool BitcoinUnits::valid(int unit)
 {
     switch(unit)
     {
-    case ALMN:
-    case mALMN:
-    case uALMN:
+    case ALLMN:
+    case mALLMN:
+    case uALLMN:
     case duffs:
         return true;
     default:
@@ -46,9 +46,9 @@ QString BitcoinUnits::name(int unit)
     {
         switch(unit)
         {
-            case ALMN: return QString("ALMN");
-            case mALMN: return QString("mALMN");
-            case uALMN: return QString::fromUtf8("μALMN");
+            case ALLMN: return QString("ALLMN");
+            case mALLMN: return QString("mALLMN");
+            case uALLMN: return QString::fromUtf8("μALLMN");
             case duffs: return QString("duffs");
             default: return QString("???");
         }
@@ -57,9 +57,9 @@ QString BitcoinUnits::name(int unit)
     {
         switch(unit)
         {
-            case ALMN: return QString("tALMN");
-            case mALMN: return QString("mtALMN");
-            case uALMN: return QString::fromUtf8("μtALMN");
+            case ALLMN: return QString("tALLMN");
+            case mALLMN: return QString("mtALLMN");
+            case uALLMN: return QString::fromUtf8("μtALLMN");
             case duffs: return QString("tduffs");
             default: return QString("???");
         }
@@ -72,10 +72,10 @@ QString BitcoinUnits::description(int unit)
     {
         switch(unit)
         {
-            case ALMN: return QString("ALMN");
-            case mALMN: return QString("Milli-ALMN (1 / 1" THIN_SP_UTF8 "000)");
-            case uALMN: return QString("Micro-ALMN (1 / 1" THIN_SP_UTF8 "000" THIN_SP_UTF8 "000)");
-            case duffs: return QString("Ten Nano-ALMN (1 / 100" THIN_SP_UTF8 "000" THIN_SP_UTF8 "000)");
+            case ALLMN: return QString("ALLMN");
+            case mALLMN: return QString("Milli-ALLMN (1 / 1" THIN_SP_UTF8 "000)");
+            case uALLMN: return QString("Micro-ALLMN (1 / 1" THIN_SP_UTF8 "000" THIN_SP_UTF8 "000)");
+            case duffs: return QString("Ten Nano-ALLMN (1 / 100" THIN_SP_UTF8 "000" THIN_SP_UTF8 "000)");
             default: return QString("???");
         }
     }
@@ -83,10 +83,10 @@ QString BitcoinUnits::description(int unit)
     {
         switch(unit)
         {
-            case ALMN: return QString("TestALMNs");
-            case mALMN: return QString("Milli-TestALMN (1 / 1" THIN_SP_UTF8 "000)");
-            case uALMN: return QString("Micro-TestALMN (1 / 1" THIN_SP_UTF8 "000" THIN_SP_UTF8 "000)");
-            case duffs: return QString("Ten Nano-TestALMN (1 / 100" THIN_SP_UTF8 "000" THIN_SP_UTF8 "000)");
+            case ALLMN: return QString("TestALLMNs");
+            case mALLMN: return QString("Milli-TestALLMN (1 / 1" THIN_SP_UTF8 "000)");
+            case uALLMN: return QString("Micro-TestALLMN (1 / 1" THIN_SP_UTF8 "000" THIN_SP_UTF8 "000)");
+            case duffs: return QString("Ten Nano-TestALLMN (1 / 100" THIN_SP_UTF8 "000" THIN_SP_UTF8 "000)");
             default: return QString("???");
         }
     }
@@ -96,9 +96,9 @@ qint64 BitcoinUnits::factor(int unit)
 {
     switch(unit)
     {
-    case ALMN:  return 100000000;
-    case mALMN: return 100000;
-    case uALMN: return 100;
+    case ALLMN:  return 100000000;
+    case mALLMN: return 100000;
+    case uALLMN: return 100;
     case duffs: return 1;
     default:   return 100000000;
     }
@@ -108,9 +108,9 @@ int BitcoinUnits::decimals(int unit)
 {
     switch(unit)
     {
-    case ALMN: return 8;
-    case mALMN: return 5;
-    case uALMN: return 2;
+    case ALLMN: return 8;
+    case mALLMN: return 5;
+    case uALLMN: return 2;
     case duffs: return 0;
     default: return 0;
     }
