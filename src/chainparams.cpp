@@ -53,11 +53,11 @@ static CBlock CreateGenesisBlock(uint32_t nTime, uint32_t nNonce, uint32_t nBits
 }
 
 
-bool CheckProof(uint256 hash, unsigned int nBits)
+bool CheckProof(uint256S hash, unsigned int nBits)
 {
     bool fNegative;
     bool fOverflow;
-    uint256 bnTarget;
+    uint256S bnTarget;
 
 
     bnTarget.SetCompact(nBits, &fNegative, &fOverflow);
@@ -137,6 +137,8 @@ public:
         nDelayGetHeadersTime = 24 * 60 * 60;
         nPruneAfterHeight = 100000;
 
+        genesis = CreateGenesisBlock(1540376000, 23790288, 0x1e0ffff0, 1, 50 * COIN);
+
         std::cout << "new genesis (main)" << std::endl;
 
         while (!CheckProof(genesis.GetHash(), genesis.nBits)) {
@@ -147,7 +149,7 @@ public:
         std::cout << genesis.GetHash().GetHex() << std::endl;
         std::cout << genesis.hashMerkleRoot.GetHex() << std::endl;
 
-        genesis = CreateGenesisBlock(1540376000, 23790288, 0x1e0ffff0, 1, 50 * COIN);
+        
         consensus.hashGenesisBlock = genesis.GetHash();
         assert(consensus.hashGenesisBlock == uint256S("0x00000b472ae3d421931662ecd3e20b909990e9801e2d5d21e80ce4321a86437c"));
         assert(genesis.hashMerkleRoot == uint256S("0x3ae2f06e6b2140ad09d698a77e282b1702552f17c93a92702cc2ed05abaa26d2"));
