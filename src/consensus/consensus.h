@@ -32,6 +32,6 @@ enum {
 };
 
 static const int MN_COLLATERAL = 2000;
-static const int PHI2_TIMESTAMP = 1536408000;
+static const int PHI2_TIMESTAMP = 1540403700+100;
 
 #endif // BITCOIN_CONSENSUS_CONSENSUS_H
