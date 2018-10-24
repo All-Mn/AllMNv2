@@ -90,8 +90,8 @@ public:
         consensus.BIP34Hash = uint256S("0x001");
         consensus.powLimit = uint256S("00000fffff000000000000000000000000000000000000000000000000000000");
 
-        consensus.nPowTargetTimespan = 5 * 60;
-        consensus.nPowTargetSpacing = 5 * 60;
+        consensus.nPowTargetTimespan = 30; // 5 * 60 - 5 minutes
+        consensus.nPowTargetSpacing = 30; // 5 * 60 - 5 minutes 
 
         consensus.fPowAllowMinDifficultyBlocks = false;
         consensus.fPowNoRetargeting = false;
@@ -370,7 +370,6 @@ public:
 
         checkpointData = (CCheckpointData){
             boost::assign::map_list_of
-            //( 0, uint256S("0x20c22c596ece808dcf1c8bf9d46539bee514689a213817e8233b3635f8b4feb7")),
             ( 0, uint256S("0x0af6b72c27c2846997eac4d613bc157cdf3f5279251d483909a9d5b159f56ed7")),
             0,
             0,
