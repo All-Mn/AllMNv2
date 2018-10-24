@@ -53,11 +53,11 @@ static CBlock CreateGenesisBlock(uint32_t nTime, uint32_t nNonce, uint32_t nBits
 }
 
 
-bool CheckProof(uint256S hash, unsigned int nBits)
+bool CheckProof(uint256 hash, unsigned int nBits)
 {
     bool fNegative;
     bool fOverflow;
-    uint256S bnTarget;
+    uint256 bnTarget;
 
 
     bnTarget.SetCompact(nBits, &fNegative, &fOverflow);
