@@ -45,7 +45,7 @@ static CBlock CreateGenesisBlock(uint32_t nTime, uint32_t nNonce, uint32_t nBits
     return CreateGenesisBlock(pszTimestamp, genesisOutputScript, nTime, nNonce, nBits, nVersion, genesisReward);
 }
 
-bool CheckProof(uint256 hash, uint32_t nBits)
+bool CheckProof(uint256S hash, uint32_t nBits)
 {
     bool fNegative;
     bool fOverflow;
