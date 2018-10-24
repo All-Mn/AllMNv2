@@ -1,0 +1,6 @@
+usr/local/bin/allmn-qt usr/bin
+share/pixmaps/allmn32.xpm usr/share/pixmaps
+share/pixmaps/allmn16.xpm usr/share/pixmaps
+share/pixmaps/allmn128.png usr/share/pixmaps
+debian/allmn-qt.desktop usr/share/applications
+debian/allmn-qt.protocol usr/share/kde4/services/

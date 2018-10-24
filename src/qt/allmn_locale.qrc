@@ -1,0 +1,20 @@
+<!DOCTYPE RCC><RCC version="1.0">
+    <qresource prefix="/translations">
+        <file alias="bg">locale/allmn_bg.qm</file>
+        <file alias="de">locale/allmn_de.qm</file>
+        <file alias="en">locale/allmn_en.qm</file>
+        <file alias="es">locale/allmn_es.qm</file>
+        <file alias="fi">locale/allmn_fi.qm</file>
+        <file alias="fr">locale/allmn_fr.qm</file>
+        <file alias="it">locale/allmn_it.qm</file>
+        <file alias="ja">locale/allmn_ja.qm</file>
+        <file alias="pl">locale/allmn_pl.qm</file>
+        <file alias="pt">locale/allmn_pt.qm</file>
+        <file alias="ru">locale/allmn_ru.qm</file>
+        <file alias="sk">locale/allmn_sk.qm</file>
+        <file alias="sv">locale/allmn_sv.qm</file>
+        <file alias="vi">locale/allmn_vi.qm</file>
+        <file alias="zh_CN">locale/allmn_zh_CN.qm</file>
+        <file alias="zh_TW">locale/allmn_zh_TW.qm</file>
+    </qresource>
+</RCC>

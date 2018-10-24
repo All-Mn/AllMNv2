@@ -1,0 +1,12 @@
+[Desktop Entry]
+Encoding=UTF-8
+Name=ALLMN
+Comment=ALLMN P2P Cryptocurrency
+Comment[fr]=ALLMN, monnaie virtuelle cryptographique pair à pair
+Comment[tr]=ALLMN, eşten eşe kriptografik sanal para birimi
+Exec=allmn-qt %u
+Terminal=false
+Type=Application
+Icon=allmn128
+MimeType=x-scheme-handler/allmn;
+Categories=Office;Finance;

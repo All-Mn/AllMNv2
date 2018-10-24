@@ -1,0 +1,22 @@
+[Unit]
+Description=ALLMN's distributed currency daemon
+After=network.target
+
+[Service]
+User=allmncore
+Group=allmncore
+
+Type=forking
+PIDFile=/var/lib/allmnd/allmnd.pid
+ExecStart=/usr/bin/allmnd -daemon -pid=/var/lib/allmnd/allmnd.pid \
+-conf=/etc/allmncore/allmn.conf -datadir=/var/lib/allmnd -disablewallet
+
+Restart=always
+PrivateTmp=true
+TimeoutStopSec=60s
+TimeoutStartSec=2s
+StartLimitInterval=120s
+StartLimitBurst=5
+
+[Install]
+WantedBy=multi-user.target
