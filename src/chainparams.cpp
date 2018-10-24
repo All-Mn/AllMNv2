@@ -6,8 +6,15 @@
 
 #include "chainparams.h"
 #include "consensus/merkle.h"
+#include "primitives/transaction.h"
 
 #include "tinyformat.h"
+#include "util.h"
+#include "utilstrencodings.h"
+
+
+
+#include "random.h"
 #include "util.h"
 #include "utilstrencodings.h"
 
@@ -45,7 +52,7 @@ static CBlock CreateGenesisBlock(uint32_t nTime, uint32_t nNonce, uint32_t nBits
     return CreateGenesisBlock(pszTimestamp, genesisOutputScript, nTime, nNonce, nBits, nVersion, genesisReward);
 }
 
-/*
+
 bool CheckProof(uint256S hash, unsigned int nBits)
 {
     bool fNegative;
@@ -65,7 +72,7 @@ bool CheckProof(uint256S hash, unsigned int nBits)
 
     return true;
 }
-*/
+
 class CMainParams : public CChainParams {
 public:
     CMainParams() {
@@ -132,9 +139,9 @@ public:
 
         std::cout << "new genesis (main)" << std::endl;
 
-//        while (!CheckProof(genesis.GetHash(), genesis.nBits)) {
-//            genesis.nNonce ++;
-//        }
+        while (!CheckProof(genesis.GetHash(), genesis.nBits)) {
+            genesis.nNonce ++;
+        }
 
         std::cout << genesis.nNonce << std::endl;
         std::cout << genesis.GetHash().GetHex() << std::endl;
