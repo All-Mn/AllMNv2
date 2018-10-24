@@ -11,7 +11,7 @@
 #include "tinyformat.h"
 #include "util.h"
 #include "utilstrencodings.h"
-
+#include "arith_uint256.h"
 
 
 #include "random.h"
@@ -42,6 +42,21 @@ static CBlock CreateGenesisBlock(const char* pszTimestamp, const CScript& genesi
     genesis.vtx.push_back(txNew);
     genesis.hashPrevBlock.SetNull();
     genesis.hashMerkleRoot = BlockMerkleRoot(genesis);
+
+    #ifdef FIND_GENESIS
+        while (true)
+        {
+            genesis.nNonce += 1;
+            if (CheckProofOfWork2(genesis.GetPoWHash(), nBits, consensus))
+            {
+                std::cout << "nonce: " << genesis.nNonce << std::endl;
+                std::cout << "hex: " << genesis.GetHash().GetHex() << std::endl;
+                std::cout << "pow hash: " << genesis.GetPoWHash().GetHex() << std::endl;
+                break;
+            }
+        }
+    #endif
+
     return genesis;
 }
 
@@ -53,25 +68,25 @@ static CBlock CreateGenesisBlock(uint32_t nTime, uint32_t nNonce, uint32_t nBits
 }
 
 
-bool CheckProof(uint256S hash, unsigned int nBits)
+bool CheckProofOfWork2(uint256 hash, unsigned int nBits, const Consensus::Params& params)
 {
     bool fNegative;
     bool fOverflow;
-    uint256S bnTarget;
-
+    arith_uint256 bnTarget;
 
     bnTarget.SetCompact(nBits, &fNegative, &fOverflow);
 
     // Check range
-    if (fNegative || bnTarget == 0 || fOverflow)
-        return false; //error("CheckProofOfWork() : nBits below minimum work");
+    if (fNegative || bnTarget == 0 || fOverflow || bnTarget > UintToArith256(params.powLimit))
+        return false;
 
     // Check proof of work matches claimed amount
-    if (hash > bnTarget)
-        return false; //error("CheckProofOfWork() : hash doesn't match nBits");
+    if (UintToArith256(hash) > bnTarget)
+        return false;
 
     return true;
 }
+
 
 class CMainParams : public CChainParams {
 public:
@@ -139,17 +154,7 @@ public:
 
         genesis = CreateGenesisBlock(1540376000, 23790288, 0x1e0ffff0, 1, 50 * COIN);
 
-        std::cout << "new genesis (main)" << std::endl;
 
-        while (!CheckProof(genesis.GetHash(), genesis.nBits)) {
-            genesis.nNonce ++;
-        }
-
-        std::cout << genesis.nNonce << std::endl;
-        std::cout << genesis.GetHash().GetHex() << std::endl;
-        std::cout << genesis.hashMerkleRoot.GetHex() << std::endl;
-
-        
         consensus.hashGenesisBlock = genesis.GetHash();
         assert(consensus.hashGenesisBlock == uint256S("0x00000b472ae3d421931662ecd3e20b909990e9801e2d5d21e80ce4321a86437c"));
         assert(genesis.hashMerkleRoot == uint256S("0x3ae2f06e6b2140ad09d698a77e282b1702552f17c93a92702cc2ed05abaa26d2"));
