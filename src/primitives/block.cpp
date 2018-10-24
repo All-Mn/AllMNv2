@@ -21,23 +21,13 @@ uint256 CBlockHeader::GetHash() const
 std::string CBlock::ToString() const
 {
     std::stringstream s;
-    if(nTime <= PHI2_TIMESTAMP) {
-      s << strprintf("CBlock(hash=%s, ver=%d, hashPrevBlock=%s, hashMerkleRoot=%s, nTime=%u, nBits=%08x, nNonce=%u, vtx=%u XEVAN)\n",
-          GetHash().ToString(),
-          nVersion,
-          hashPrevBlock.ToString(),
-          hashMerkleRoot.ToString(),
-          nTime, nBits, nNonce,
-          vtx.size());
-    } else {
-      s << strprintf("CBlock(hash=%s, ver=%d, hashPrevBlock=%s, hashMerkleRoot=%s, nTime=%u, nBits=%08x, nNonce=%u, vtx=%u PHI2)\n",
-          GetHash().ToString(),
-          nVersion,
-          hashPrevBlock.ToString(),
-          hashMerkleRoot.ToString(),
-          nTime, nBits, nNonce,
-          vtx.size());
-    }
+    s << strprintf("CBlock(hash=%s, ver=%d, hashPrevBlock=%s, hashMerkleRoot=%s, nTime=%u, nBits=%08x, nNonce=%u, vtx=%u )\n",
+        GetHash().ToString(),
+        nVersion,
+        hashPrevBlock.ToString(),
+        hashMerkleRoot.ToString(),
+        nTime, nBits, nNonce,
+        vtx.size());
 
     for (unsigned int i = 0; i < vtx.size(); i++)
     {
