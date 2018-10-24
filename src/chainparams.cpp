@@ -43,19 +43,13 @@ static CBlock CreateGenesisBlock(const char* pszTimestamp, const CScript& genesi
     genesis.hashPrevBlock.SetNull();
     genesis.hashMerkleRoot = BlockMerkleRoot(genesis);
 
-    #ifdef FIND_GENESIS
-        while (true)
-        {
-            genesis.nNonce += 1;
-            if (CheckProofOfWork2(genesis.GetPoWHash(), nBits, consensus))
-            {
-                std::cout << "nonce: " << genesis.nNonce << std::endl;
-                std::cout << "hex: " << genesis.GetHash().GetHex() << std::endl;
-                std::cout << "pow hash: " << genesis.GetPoWHash().GetHex() << std::endl;
-                break;
-            }
-        }
-    #endif
+    while (!CheckProofOfWork2(genesis.GetHash(), genesis.nBits)) {
+        genesis.nNonce ++;
+    }
+
+    std::cout << genesis.nNonce << std::endl;
+    std::cout << genesis.GetHash().GetHex() << std::endl;
+    std::cout << genesis.hashMerkleRoot.GetHex() << std::endl;
 
     return genesis;
 }
@@ -153,7 +147,6 @@ public:
         nPruneAfterHeight = 100000;
 
         genesis = CreateGenesisBlock(1540376000, 23790288, 0x1e0ffff0, 1, 50 * COIN);
-
 
         consensus.hashGenesisBlock = genesis.GetHash();
         assert(consensus.hashGenesisBlock == uint256S("0x00000b472ae3d421931662ecd3e20b909990e9801e2d5d21e80ce4321a86437c"));
