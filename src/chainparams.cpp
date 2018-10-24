@@ -49,7 +49,7 @@ bool CheckProof(uint256 hash, uint32_t nBits)
 {
     bool fNegative;
     bool fOverflow;
-    uint256 bnTarget;
+    uint256S bnTarget;
 
 
     bnTarget.SetCompact(nBits, &fNegative, &fOverflow);
