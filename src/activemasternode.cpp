@@ -218,7 +218,7 @@ void CActiveMasternode::ManageStateInitial(CConnman& connman)
     }
 
     if(pwalletMain->GetBalance() < MN_COLLATERAL * COIN) {
-        LogPrintf("CActiveMasternode::ManageStateInitial -- %s: Wallet balance is < %d ALLMN\n", GetStateString(), MN_COLLATERAL * COIN);
+        LogPrintf("CActiveMasternode::ManageStateInitial -- %s: Wallet balance is < %s ALLMN\n", GetStateString(), MN_COLLATERAL);
         return;
     }
 

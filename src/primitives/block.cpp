@@ -15,13 +15,18 @@
 
 uint256 CBlockHeader::GetHash() const
 {
-    return phi2_hash(BEGIN(nVersion), END(nNonce));
+    if(nTime <= PHI2_TIMESTAMP) {
+      return XEVAN(BEGIN(nVersion), END(nNonce));
+    } else {
+      return phi2_hash(BEGIN(nVersion), END(nNonce));
+    }
+
 }
 
 std::string CBlock::ToString() const
 {
     std::stringstream s;
-    s << strprintf("CBlock(hash=%s, ver=%d, hashPrevBlock=%s, hashMerkleRoot=%s, nTime=%u, nBits=%08x, nNonce=%u, vtx=%u )\n",
+    s << strprintf("CBlock(hash=%s, ver=%d, hashPrevBlock=%s, hashMerkleRoot=%s, nTime=%u, nBits=%08x, nNonce=%u, vtx=%u XEVAN)\n",
         GetHash().ToString(),
         nVersion,
         hashPrevBlock.ToString(),
