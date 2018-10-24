@@ -17,6 +17,26 @@
 
 #include "chainparamsseeds.h"
 
+bool CheckProof(uint256 hash, unsigned int nBits)
+{
+    bool fNegative;
+    bool fOverflow;
+    uint256 bnTarget;
+
+
+    bnTarget.SetCompact(nBits, &fNegative, &fOverflow);
+
+    // Check range
+    if (fNegative || bnTarget == 0 || fOverflow)
+        return false; //error("CheckProofOfWork() : nBits below minimum work");
+
+    // Check proof of work matches claimed amount
+    if (hash > bnTarget)
+        return false; //error("CheckProofOfWork() : hash doesn't match nBits");
+
+    return true;
+}
+
 static CBlock CreateGenesisBlock(const char* pszTimestamp, const CScript& genesisOutputScript, uint32_t nTime, uint32_t nNonce, uint32_t nBits, int32_t nVersion, const CAmount& genesisReward)
 {
     CMutableTransaction txNew;
@@ -109,7 +129,17 @@ public:
         nDelayGetHeadersTime = 24 * 60 * 60;
         nPruneAfterHeight = 100000;
 
-        genesis = CreateGenesisBlock(1535625440, 23790288, 0x1e0ffff0, 1, 50 * COIN);
+        std::cout << "new genesis (main)" << std::endl;
+
+        while (!CheckProof(genesis.GetHash(), genesis.nBits)) {
+            genesis.nNonce ++;
+        }
+
+        std::cout << genesis.nNonce << std::endl;
+        std::cout << genesis.GetHash().GetHex() << std::endl;
+        std::cout << genesis.hashMerkleRoot.GetHex() << std::endl;
+
+        genesis = CreateGenesisBlock(1540376000, 23790288, 0x1e0ffff0, 1, 50 * COIN);
         consensus.hashGenesisBlock = genesis.GetHash();
         assert(consensus.hashGenesisBlock == uint256S("0x00000b472ae3d421931662ecd3e20b909990e9801e2d5d21e80ce4321a86437c"));
         assert(genesis.hashMerkleRoot == uint256S("0x3ae2f06e6b2140ad09d698a77e282b1702552f17c93a92702cc2ed05abaa26d2"));
@@ -146,7 +176,7 @@ public:
         checkpointData = (CCheckpointData) {
             boost::assign::map_list_of
             (    0, uint256S("0x00000b472ae3d421931662ecd3e20b909990e9801e2d5d21e80ce4321a86437c")),
-            1536408391, // * UNIX timestamp of last checkpoint block
+            1540376000, // * UNIX timestamp of last checkpoint block
             0,          // * total number of transactions between genesis and last checkpoint
                         //   (the tx=... number in the SetBestChain debug.log lines)
             2800        // * estimated number of transactions per day after checkpoint
@@ -220,7 +250,7 @@ public:
         nDelayGetHeadersTime = 24 * 60 * 60;
         nPruneAfterHeight = 1000;
 
-        genesis = CreateGenesisBlock(1535625441, 21275042, 0x1e0ffff0, 1, 50 * COIN);
+        genesis = CreateGenesisBlock(1540376000, 21275042, 0x1e0ffff0, 1, 50 * COIN);
         consensus.hashGenesisBlock = genesis.GetHash();
         assert(consensus.hashGenesisBlock == uint256S("0x0000066e1a274020f32483aa6be7826af3e73dc62b87e53eb74bf28afed51802"));
         assert(genesis.hashMerkleRoot == uint256S("0x3ae2f06e6b2140ad09d698a77e282b1702552f17c93a92702cc2ed05abaa26d2"));
@@ -254,7 +284,7 @@ public:
         checkpointData = (CCheckpointData) {
             boost::assign::map_list_of
             (    0, uint256S("0x0000066e1a274020f32483aa6be7826af3e73dc62b87e53eb74bf28afed51802")),
-            1535625441, // * UNIX timestamp of last checkpoint block
+            1540376000, // * UNIX timestamp of last checkpoint block
             0,       // * total number of transactions between genesis and last checkpoint
                         //   (the tx=... number in the SetBestChain debug.log lines)
             500         // * estimated number of transactions per day after checkpoint
@@ -322,7 +352,7 @@ public:
         nDefaultPort = 36010;
         nPruneAfterHeight = 1000;
 
-        genesis = CreateGenesisBlock(1535625442, 20542300, 0x207fffff, 1, 50 * COIN);
+        genesis = CreateGenesisBlock(1540376000, 20542300, 0x207fffff, 1, 50 * COIN);
         consensus.hashGenesisBlock = genesis.GetHash();
         assert(consensus.hashGenesisBlock == uint256S("0x0af6b72c27c2846997eac4d613bc157cdf3f5279251d483909a9d5b159f56ed7"));
         assert(genesis.hashMerkleRoot == uint256S("0x3ae2f06e6b2140ad09d698a77e282b1702552f17c93a92702cc2ed05abaa26d2"));
