@@ -31,6 +31,6 @@ enum {
     LOCKTIME_MEDIAN_TIME_PAST = (1 << 1),
 };
 
-static const int MN_COLLATERAL = (10000 * COIN);
+static const unsigned int MN_COLLATERAL = (10000 * COIN);
 
 #endif // BITCOIN_CONSENSUS_CONSENSUS_H
