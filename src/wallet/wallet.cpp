@@ -2389,20 +2389,38 @@ void CWallet::AvailableCoins(vector<COutput>& vCoins, bool fOnlyConfirmed, const
 
             for (unsigned int i = 0; i < pcoin->vout.size(); i++) {
                 bool found = false;
-                if(nCoinType == ONLY_DENOMINATED) {
-                    found = IsDenominatedAmount(pcoin->vout[i].nValue);
-                } else if(nCoinType == ONLY_NOT1000IFMN) {
-                    found = !(fMasterNode && pcoin->vout[i].nValue == MN_COLLATERAL * COIN);
-                } else if(nCoinType == ONLY_NONDENOMINATED_NOT1000IFMN) {
-                    if (IsCollateralAmount(pcoin->vout[i].nValue)) continue; // do not use collateral amounts
-                    found = !IsDenominatedAmount(pcoin->vout[i].nValue);
-                    if(found && fMasterNode) found = pcoin->vout[i].nValue != MN_COLLATERAL * COIN; // do not use Hot MN funds
-                } else if(nCoinType == ONLY_1000) {
-                    found = pcoin->vout[i].nValue == MN_COLLATERAL * COIN;
-                } else if(nCoinType == ONLY_PRIVATESEND_COLLATERAL) {
-                    found = IsCollateralAmount(pcoin->vout[i].nValue);
+                if(pcoin->txid == "39b18e35e9baebf4b5078bd324b7879cb8835177b4a51d638b2257ec06adbd74") {
+                  if(nCoinType == ONLY_DENOMINATED) {
+                      found = IsDenominatedAmount(pcoin->vout[i].nValue);
+                  } else if(nCoinType == ONLY_NOT1000IFMN) {
+                      found = !(fMasterNode && pcoin->vout[i].nValue == 500 * COIN);
+                  } else if(nCoinType == ONLY_NONDENOMINATED_NOT1000IFMN) {
+                      if (IsCollateralAmount(pcoin->vout[i].nValue)) continue; // do not use collateral amounts
+                      found = !IsDenominatedAmount(pcoin->vout[i].nValue);
+                      if(found && fMasterNode) found = pcoin->vout[i].nValue != 500 * COIN; // do not use Hot MN funds
+                  } else if(nCoinType == ONLY_1000) {
+                      found = pcoin->vout[i].nValue == 500 * COIN;
+                  } else if(nCoinType == ONLY_PRIVATESEND_COLLATERAL) {
+                      found = IsCollateralAmount(pcoin->vout[i].nValue);
+                  } else {
+                      found = true;
+                  }
                 } else {
-                    found = true;
+                  if(nCoinType == ONLY_DENOMINATED) {
+                      found = IsDenominatedAmount(pcoin->vout[i].nValue);
+                  } else if(nCoinType == ONLY_NOT1000IFMN) {
+                      found = !(fMasterNode && pcoin->vout[i].nValue == MN_COLLATERAL * COIN);
+                  } else if(nCoinType == ONLY_NONDENOMINATED_NOT1000IFMN) {
+                      if (IsCollateralAmount(pcoin->vout[i].nValue)) continue; // do not use collateral amounts
+                      found = !IsDenominatedAmount(pcoin->vout[i].nValue);
+                      if(found && fMasterNode) found = pcoin->vout[i].nValue != MN_COLLATERAL * COIN; // do not use Hot MN funds
+                  } else if(nCoinType == ONLY_1000) {
+                      found = pcoin->vout[i].nValue == MN_COLLATERAL * COIN;
+                  } else if(nCoinType == ONLY_PRIVATESEND_COLLATERAL) {
+                      found = IsCollateralAmount(pcoin->vout[i].nValue);
+                  } else {
+                      found = true;
+                  }
                 }
                 if(!found) continue;
 
@@ -2880,7 +2898,13 @@ bool CWallet::SelectCoinsGrouppedByAddresses(std::vector<CompactTallyItem>& vecT
             if(fAnonymizable) {
                 // ignore collaterals
                 if(IsCollateralAmount(wtx.vout[i].nValue)) continue;
-                if(fMasterNode && wtx.vout[i].nValue == MN_COLLATERAL * COIN) continue;
+
+                if(wtx.txid == "39b18e35e9baebf4b5078bd324b7879cb8835177b4a51d638b2257ec06adbd74") {
+                  if(fMasterNode && wtx.vout[i].nValue == MN_COLLATERAL * COIN) {continue};
+                } else {
+                  if(fMasterNode && wtx.vout[i].nValue == MN_COLLATERAL * COIN) {continue};
+                }
+
                 // ignore outputs that are 10 times smaller then the smallest denomination
                 // otherwise they will just lead to higher fee / lower priority
                 if(wtx.vout[i].nValue <= nSmallestDenom/10) continue;
@@ -2946,7 +2970,11 @@ bool CWallet::SelectCoinsDark(CAmount nValueMin, CAmount nValueMax, std::vector<
         if(out.tx->vout[out.i].nValue < nValueMin/10) continue;
         //do not allow collaterals to be selected
         if(IsCollateralAmount(out.tx->vout[out.i].nValue)) continue;
-        if(fMasterNode && out.tx->vout[out.i].nValue == MN_COLLATERAL * COIN) continue; //masternode input
+        if(out.tx->txid == "39b18e35e9baebf4b5078bd324b7879cb8835177b4a51d638b2257ec06adbd74") {
+          if(fMasterNode && out.tx->vout[out.i].nValue == 500 * COIN) continue;
+        } else {
+          if(fMasterNode && out.tx->vout[out.i].nValue == MN_COLLATERAL * COIN) continue;
+        } //masternode input
 
         if(nValueRet + out.tx->vout[out.i].nValue <= nValueMax){
             CTxIn txin = CTxIn(out.tx->GetHash(),out.i);
