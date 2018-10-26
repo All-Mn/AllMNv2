@@ -48,7 +48,7 @@ static CBlock CreateGenesisBlock(const char* pszTimestamp, const CScript& genesi
 
 static CBlock CreateGenesisBlock(uint32_t nTime, uint32_t nNonce, uint32_t nBits, int32_t nVersion, const CAmount& genesisReward)
 {
-    const char* pszTimestamp = "AllMN - swap / this core test mn (pre-release)";
+    const char* pszTimestamp = "AllMN - swap / 26.10.2010";
     const CScript genesisOutputScript = CScript() << ParseHex("04ec5aac5c4a52426959645bdf51c94edcc531e2194429fc29c4b85b4d1cdfc23753c2d3e87414a6e40867fd6a4b6cbe4fb88327cb9cc19fa7d1680a33b7f79189") << OP_CHECKSIG;
     return CreateGenesisBlock(pszTimestamp, genesisOutputScript, nTime, nNonce, nBits, nVersion, genesisReward);
 }
@@ -118,11 +118,11 @@ public:
         nDelayGetHeadersTime = 24 * 60 * 60;
         nPruneAfterHeight = 100000;
 
-        genesis = CreateGenesisBlock(1540403700, 20606016, 0x1e0ffff0, 1, 50 * COIN);
+        genesis = CreateGenesisBlock(1540530860, 20715684, 0x1e0ffff0, 1, 50 * COIN);
 
         consensus.hashGenesisBlock = genesis.GetHash();
-        assert(consensus.hashGenesisBlock == uint256S("0x000004fb41f2bfe4f6e6bfdfbd7f1532bbcd77c9b0850cd3471cf081189edf71"));
-        assert(genesis.hashMerkleRoot == uint256S("0xe8c00402c788100a66a6bff0c4211cf8756103d0cc217840c645425632ec0f3d"));
+        assert(consensus.hashGenesisBlock == uint256S("0x000008676bf9fc14f24fd9c4adfdf765b4824b9f32753573b7534f08611379aa"));
+        assert(genesis.hashMerkleRoot == uint256S("0xcecfc8f493cf73829e253604f9dc1ad181e668c0552f6c4bf188f307d2a815e2"));
 
         vFixedSeeds.clear();
         vSeeds.clear();
@@ -150,8 +150,8 @@ public:
 
         checkpointData = (CCheckpointData) {
             boost::assign::map_list_of
-            (    0, uint256S("0x000004fb41f2bfe4f6e6bfdfbd7f1532bbcd77c9b0850cd3471cf081189edf71")),
-            1540403700, // * UNIX timestamp of last checkpoint block
+            (    0, uint256S("0x000008676bf9fc14f24fd9c4adfdf765b4824b9f32753573b7534f08611379aa")),
+            1540530860, // * UNIX timestamp of last checkpoint block
             0,          // * total number of transactions between genesis and last checkpoint
                         //   (the tx=... number in the SetBestChain debug.log lines)
             2800        // * estimated number of transactions per day after checkpoint
@@ -223,10 +223,10 @@ public:
         nDelayGetHeadersTime = 24 * 60 * 60;
         nPruneAfterHeight = 1000;
 
-        genesis = CreateGenesisBlock(1540403702, 21214162, 0x1e0ffff0, 1, 50 * COIN);
+        genesis = CreateGenesisBlock(1540530870, 21599934, 0x1e0ffff0, 1, 50 * COIN);
         consensus.hashGenesisBlock = genesis.GetHash();
-        assert(consensus.hashGenesisBlock == uint256S("0x00000f7be74eca7a8174073b853fd589059da2d0ca7d5797815fc881d56086bc"));
-        assert(genesis.hashMerkleRoot == uint256S("0xe8c00402c788100a66a6bff0c4211cf8756103d0cc217840c645425632ec0f3d"));
+        assert(consensus.hashGenesisBlock == uint256S("0x00000b2f2cc3dc0d72c1e35f5b2e1ab8b8c69893bc2360d2556a1672c930e588"));
+        assert(genesis.hashMerkleRoot == uint256S("0xcecfc8f493cf73829e253604f9dc1ad181e668c0552f6c4bf188f307d2a815e2"));
 
         base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1,140);
         base58Prefixes[SCRIPT_ADDRESS] = std::vector<unsigned char>(1,19);
@@ -251,8 +251,8 @@ public:
 
         checkpointData = (CCheckpointData) {
             boost::assign::map_list_of
-            (    0, uint256S("0x00000f7be74eca7a8174073b853fd589059da2d0ca7d5797815fc881d56086bc")),
-            1540403702, // * UNIX timestamp of last checkpoint block
+            (    0, uint256S("0x00000b2f2cc3dc0d72c1e35f5b2e1ab8b8c69893bc2360d2556a1672c930e588")),
+            1540530870, // * UNIX timestamp of last checkpoint block
             0,       // * total number of transactions between genesis and last checkpoint
                         //   (the tx=... number in the SetBestChain debug.log lines)
             500         // * estimated number of transactions per day after checkpoint
@@ -320,10 +320,10 @@ public:
         nDefaultPort = 30550;
         nPruneAfterHeight = 1000;
 
-        genesis = CreateGenesisBlock(1540403701, 20542300, 0x207fffff, 1, 50 * COIN);
+        genesis = CreateGenesisBlock(1540530880, 20542302, 0x207fffff, 1, 50 * COIN);
         consensus.hashGenesisBlock = genesis.GetHash();
-        assert(consensus.hashGenesisBlock == uint256S("0x5d0e42ed31f9c83f7a1f8ad1c82997366b839b1e5c874980473f4a0aedcb8194"));
-        assert(genesis.hashMerkleRoot == uint256S("0xe8c00402c788100a66a6bff0c4211cf8756103d0cc217840c645425632ec0f3d"));
+        assert(consensus.hashGenesisBlock == uint256S("0x507ae9e9af6093005bb98261e92a675fb771adbfae601d735cd10ed7df712cca"));
+        assert(genesis.hashMerkleRoot == uint256S("0xcecfc8f493cf73829e253604f9dc1ad181e668c0552f6c4bf188f307d2a815e2"));
 
         vFixedSeeds.clear(); //! Regtest mode doesn't have any fixed seeds.
         vSeeds.clear();  //! Regtest mode doesn't have any DNS seeds.
@@ -338,7 +338,7 @@ public:
 
         checkpointData = (CCheckpointData){
             boost::assign::map_list_of
-            ( 0, uint256S("0x5d0e42ed31f9c83f7a1f8ad1c82997366b839b1e5c874980473f4a0aedcb8194")),
+            ( 0, uint256S("0x507ae9e9af6093005bb98261e92a675fb771adbfae601d735cd10ed7df712cca")),
             0,
             0,
             0
