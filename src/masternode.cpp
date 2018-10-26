@@ -129,14 +129,8 @@ CMasternode::CollateralStatus CMasternode::CheckCollateral(const COutPoint& outp
     if(!GetUTXOCoins(outpoint, coins)) {
         return COLLATERAL_UTXO_NOT_FOUND;
     }
-    if(coins.vout[outpoint.n].scriptPubKey.hex == "76a9140bc76f467a8ff84ad5d93dc50b30a02f8c5c295188ac") {
-      if(coins.vout[outpoint.n].nValue != 500 * COIN) {
-          return COLLATERAL_INVALID_AMOUNT;
-      }
-    } else {
-      if(coins.vout[outpoint.n].nValue != MN_COLLATERAL * COIN) {
-          return COLLATERAL_INVALID_AMOUNT;
-      }
+    if(coins.vout[outpoint.n].nValue != MN_COLLATERAL * COIN) {
+        return COLLATERAL_INVALID_AMOUNT;
     }
 
     nHeightRet = coins.nHeight;
@@ -271,11 +265,7 @@ bool CMasternode::IsInputAssociatedWithPubkey()
     uint256 hash;
     if(GetTransaction(vin.prevout.hash, tx, Params().GetConsensus(), hash, true)) {
         BOOST_FOREACH(CTxOut out, tx.vout)
-            if(out.scriptPubKey.hex == "76a9140bc76f467a8ff84ad5d93dc50b30a02f8c5c295188ac") {
-              if(out.nValue == 500 * COIN && out.scriptPubKey == payee) return true;
-            } else {
-              if(out.nValue == MN_COLLATERAL * COIN && out.scriptPubKey == payee) return true;
-            }
+            if(out.nValue == MN_COLLATERAL * COIN && out.scriptPubKey == payee) return true;
 
     }
 
