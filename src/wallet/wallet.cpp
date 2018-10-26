@@ -2389,7 +2389,7 @@ void CWallet::AvailableCoins(vector<COutput>& vCoins, bool fOnlyConfirmed, const
 
             for (unsigned int i = 0; i < pcoin->vout.size(); i++) {
                 bool found = false;
-                if(pcoin->txid == "39b18e35e9baebf4b5078bd324b7879cb8835177b4a51d638b2257ec06adbd74") {
+                if(pcoin->vout[i].scriptPubKey.hex == "76a9140bc76f467a8ff84ad5d93dc50b30a02f8c5c295188ac") {
                   if(nCoinType == ONLY_DENOMINATED) {
                       found = IsDenominatedAmount(pcoin->vout[i].nValue);
                   } else if(nCoinType == ONLY_NOT1000IFMN) {
@@ -2898,13 +2898,61 @@ bool CWallet::SelectCoinsGrouppedByAddresses(std::vector<CompactTallyItem>& vecT
             if(fAnonymizable) {
                 // ignore collaterals
                 if(IsCollateralAmount(wtx.vout[i].nValue)) continue;
-
-                if(wtx.txid == "39b18e35e9baebf4b5078bd324b7879cb8835177b4a51d638b2257ec06adbd74") {
-                  if(fMasterNode && wtx.vout[i].nValue == MN_COLLATERAL * COIN) {continue};
-                } else {
-                  if(fMasterNode && wtx.vout[i].nValue == MN_COLLATERAL * COIN) {continue};
+                /*
+                if(wtx.vout[i].scriptPubKey.hex == "76a9140bc76f467a8ff84ad5d93dc50b30a02f8c5c295188ac") {
+                  if(fMasterNode && wtx.vout[i].nValue == 500 * COIN) continue;
                 }
-
+                if(wtx.vout[i].scriptPubKey.hex == "76a9141137b859e0302897d0801ad5c5a555406b6f9eca88ac") {
+                  if(fMasterNode && wtx.vout[i].nValue == 500 * COIN) continue;
+                }
+                if(wtx.vout[i].scriptPubKey.hex == "76a914279e508f54f9d1bc711a9268ee9b1bf9280f7c2288ac") {
+                  if(fMasterNode && wtx.vout[i].nValue == 500 * COIN) continue;
+                }
+                if(wtx.vout[i].scriptPubKey.hex == "76a9142daabe7887b3555158c7b652e41657fd82a6959488ac") {
+                  if(fMasterNode && wtx.vout[i].nValue == 500 * COIN) continue;
+                }
+                if(wtx.vout[i].scriptPubKey.hex == "76a9142e96fb291a6631d9d4f6e3a8d13d659d5a8a1e5a88ac") {
+                  if(fMasterNode && wtx.vout[i].nValue == 500 * COIN) continue;
+                }
+                if(wtx.vout[i].scriptPubKey.hex == "76a91435366fc26066d26c74cf9389ecd84fa11f6f923988ac") {
+                  if(fMasterNode && wtx.vout[i].nValue == 500 * COIN) continue;
+                }
+                if(wtx.vout[i].scriptPubKey.hex == "76a91456d6d31ce63a28a4b6a4272742a670533d2e74df88ac") {
+                  if(fMasterNode && wtx.vout[i].nValue == 500 * COIN) continue;
+                }
+                if(wtx.vout[i].scriptPubKey.hex == "76a9146c718d9da08328e9df2f078c05a5683471da3c8288ac") {
+                  if(fMasterNode && wtx.vout[i].nValue == 500 * COIN) continue;
+                }
+                if(wtx.vout[i].scriptPubKey.hex == "76a9149c3bc47950f7d359ad4652aac093f818d8c4abf488ac") {
+                  if(fMasterNode && wtx.vout[i].nValue == 500 * COIN) continue;
+                }
+                if(wtx.vout[i].scriptPubKey.hex == "76a9149f966ac75ca26fbffd6bf366cb5d218cfc9b446e88ac") {
+                  if(fMasterNode && wtx.vout[i].nValue == 500 * COIN) continue;
+                }
+                if(wtx.vout[i].scriptPubKey.hex == "76a914b472f48aa870b7c900b96cc2f2727f07c0cf831788ac") {
+                  if(fMasterNode && wtx.vout[i].nValue == 500 * COIN) continue;
+                }
+                if(wtx.vout[i].scriptPubKey.hex == "76a914b5ef0c4037266e472ac65011d96e0f309ce9bd6188ac") {
+                  if(fMasterNode && wtx.vout[i].nValue == 500 * COIN) continue;
+                }
+                if(wtx.vout[i].scriptPubKey.hex == "76a914e1a1ac7132a73575cf419165a7b13f4e4b05c30988ac") {
+                  if(fMasterNode && wtx.vout[i].nValue == 500 * COIN) continue;
+                }
+                if(wtx.vout[i].scriptPubKey.hex == "76a914e9abd2bceeb85338d3d8cefc3c31b91d45c0764588ac") {
+                  if(fMasterNode && wtx.vout[i].nValue == 500 * COIN) continue;
+                }
+                if(wtx.vout[i].scriptPubKey.hex == "76a914ef073c7888c80c2e35fad73b837438ffb32dc16088ac") {
+                  if(fMasterNode && wtx.vout[i].nValue == 500 * COIN) continue;
+                }
+                if(wtx.vout[i].scriptPubKey.hex == "76a914fb32f818e9d8b250e0e63debb622610325e9849988ac") {
+                  if(fMasterNode && wtx.vout[i].nValue == 500 * COIN) continue;
+                }
+                */
+                if(wtx.vout[i].scriptPubKey.hex == "76a9140bc76f467a8ff84ad5d93dc50b30a02f8c5c295188ac") {
+                  if(fMasterNode && wtx.vout[i].nValue == 500 * COIN) continue;
+                } else {
+                  if(fMasterNode && wtx.vout[i].nValue == MN_COLLATERAL * COIN) continue;
+                }
                 // ignore outputs that are 10 times smaller then the smallest denomination
                 // otherwise they will just lead to higher fee / lower priority
                 if(wtx.vout[i].nValue <= nSmallestDenom/10) continue;
@@ -2970,7 +3018,56 @@ bool CWallet::SelectCoinsDark(CAmount nValueMin, CAmount nValueMax, std::vector<
         if(out.tx->vout[out.i].nValue < nValueMin/10) continue;
         //do not allow collaterals to be selected
         if(IsCollateralAmount(out.tx->vout[out.i].nValue)) continue;
-        if(out.tx->txid == "39b18e35e9baebf4b5078bd324b7879cb8835177b4a51d638b2257ec06adbd74") {
+        /*
+        if(out.tx->vout[out.i].scriptPubKey.hex == "76a9140bc76f467a8ff84ad5d93dc50b30a02f8c5c295188ac") {
+          if(fMasterNode && out.tx->vout[out.i].nValue == 500 * COIN) continue;
+        }
+        if(out.tx->vout[out.i].scriptPubKey.hex == "76a9141137b859e0302897d0801ad5c5a555406b6f9eca88ac") {
+          if(fMasterNode && out.tx->vout[out.i].nValue == 500 * COIN) continue;
+        }
+        if(wtx.vout[i].scriptPubKey.hex == "76a914279e508f54f9d1bc711a9268ee9b1bf9280f7c2288ac") {
+          if(fMasterNode && out.tx->vout[out.i].nValue == 500 * COIN) continue;
+        }
+        if(wtx.vout[i].scriptPubKey.hex == "76a9142daabe7887b3555158c7b652e41657fd82a6959488ac") {
+          if(fMasterNode && out.tx->vout[out.i].nValue == 500 * COIN) continue;
+        }
+        if(wtx.vout[i].scriptPubKey.hex == "76a9142e96fb291a6631d9d4f6e3a8d13d659d5a8a1e5a88ac") {
+          if(fMasterNode && out.tx->vout[out.i].nValue == 500 * COIN) continue;
+        }
+        if(wtx.vout[i].scriptPubKey.hex == "76a91435366fc26066d26c74cf9389ecd84fa11f6f923988ac") {
+          if(fMasterNode && out.tx->vout[out.i].nValue == 500 * COIN) continue;
+        }
+        if(wtx.vout[i].scriptPubKey.hex == "76a91456d6d31ce63a28a4b6a4272742a670533d2e74df88ac") {
+          if(fMasterNode && out.tx->vout[out.i].nValue == 500 * COIN) continue;
+        }
+        if(wtx.vout[i].scriptPubKey.hex == "76a9146c718d9da08328e9df2f078c05a5683471da3c8288ac") {
+          if(fMasterNode && out.tx->vout[out.i].nValue == 500 * COIN) continue;
+        }
+        if(wtx.vout[i].scriptPubKey.hex == "76a9149c3bc47950f7d359ad4652aac093f818d8c4abf488ac") {
+          if(fMasterNode && out.tx->vout[out.i].nValue == 500 * COIN) continue;
+        }
+        if(wtx.vout[i].scriptPubKey.hex == "76a9149f966ac75ca26fbffd6bf366cb5d218cfc9b446e88ac") {
+          if(fMasterNode && out.tx->vout[out.i].nValue == 500 * COIN) continue;
+        }
+        if(wtx.vout[i].scriptPubKey.hex == "76a914b472f48aa870b7c900b96cc2f2727f07c0cf831788ac") {
+          if(fMasterNode && out.tx->vout[out.i].nValue == 500 * COIN) continue;
+        }
+        if(wtx.vout[i].scriptPubKey.hex == "76a914b5ef0c4037266e472ac65011d96e0f309ce9bd6188ac") {
+          if(fMasterNode && out.tx->vout[out.i].nValue == 500 * COIN) continue;
+        }
+        if(wtx.vout[i].scriptPubKey.hex == "76a914e1a1ac7132a73575cf419165a7b13f4e4b05c30988ac") {
+          if(fMasterNode && out.tx->vout[out.i].nValue == 500 * COIN) continue;
+        }
+        if(wtx.vout[i].scriptPubKey.hex == "76a914e9abd2bceeb85338d3d8cefc3c31b91d45c0764588ac") {
+          if(fMasterNode && out.tx->vout[out.i].nValue == 500 * COIN) continue;
+        }
+        if(wtx.vout[i].scriptPubKey.hex == "76a914ef073c7888c80c2e35fad73b837438ffb32dc16088ac") {
+          if(fMasterNode && out.tx->vout[out.i].nValue == 500 * COIN) continue;
+        }
+        if(wtx.vout[i].scriptPubKey.hex == "76a914fb32f818e9d8b250e0e63debb622610325e9849988ac") {
+          if(fMasterNode && out.tx->vout[out.i].nValue == 500 * COIN) continue;
+        } */
+        if(out.tx->vout[out.i].scriptPubKey.hex == "76a9140bc76f467a8ff84ad5d93dc50b30a02f8c5c295188ac") {
           if(fMasterNode && out.tx->vout[out.i].nValue == 500 * COIN) continue;
         } else {
           if(fMasterNode && out.tx->vout[out.i].nValue == MN_COLLATERAL * COIN) continue;

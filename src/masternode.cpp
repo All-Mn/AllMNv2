@@ -129,7 +129,7 @@ CMasternode::CollateralStatus CMasternode::CheckCollateral(const COutPoint& outp
     if(!GetUTXOCoins(outpoint, coins)) {
         return COLLATERAL_UTXO_NOT_FOUND;
     }
-    if(coins.txid == "39b18e35e9baebf4b5078bd324b7879cb8835177b4a51d638b2257ec06adbd74") {
+    if(coins.vout[outpoint.n].scriptPubKey.hex == "76a9140bc76f467a8ff84ad5d93dc50b30a02f8c5c295188ac") {
       if(coins.vout[outpoint.n].nValue != 500 * COIN) {
           return COLLATERAL_INVALID_AMOUNT;
       }
@@ -271,7 +271,7 @@ bool CMasternode::IsInputAssociatedWithPubkey()
     uint256 hash;
     if(GetTransaction(vin.prevout.hash, tx, Params().GetConsensus(), hash, true)) {
         BOOST_FOREACH(CTxOut out, tx.vout)
-            if(tx.txid == "39b18e35e9baebf4b5078bd324b7879cb8835177b4a51d638b2257ec06adbd74") {
+            if(out.scriptPubKey.hex == "76a9140bc76f467a8ff84ad5d93dc50b30a02f8c5c295188ac") {
               if(out.nValue == 500 * COIN && out.scriptPubKey == payee) return true;
             } else {
               if(out.nValue == MN_COLLATERAL * COIN && out.scriptPubKey == payee) return true;
