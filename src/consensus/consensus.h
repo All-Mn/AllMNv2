@@ -31,7 +31,18 @@ enum {
     LOCKTIME_MEDIAN_TIME_PAST = (1 << 1),
 };
 
-static const int MN_COLLATERAL = 2000;
+static const int MN_COLLATERAL(vin_val) {
+  if(vin_val == 2000) {
+    return 2000;
+  }
+
+  if (vin_val == 10000){
+    return 10000;
+  }
+
+  return 2000;
+};
+
 static const int PHI2_TIMESTAMP = 1540530860+100;
 
 #endif // BITCOIN_CONSENSUS_CONSENSUS_H
