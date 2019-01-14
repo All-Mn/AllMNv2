@@ -6,6 +6,7 @@
 
 #include "miner.h"
 
+#include "base58.h"
 #include "amount.h"
 #include "chain.h"
 #include "chainparams.h"
@@ -294,9 +295,9 @@ CBlockTemplate* CreateNewBlock(const CChainParams& chainparams, const CScript& s
         CScript FounderScript;
         if (founderPayment > 0) {
             if(nHeight % 2 == 0) {
-               FounderScript= GetScriptForDestination(CBitcoinAddress(Params().FounderAddress0()).Get());
+               FounderScript = GetScriptForDestination(CBitcoinAddress(Params().FounderAddress0()).Get());
             } else {
-                FounderScript = GetScriptForDestination(CBitcoinAddress(Params().FounderAddress1()).Get());
+               FounderScript = GetScriptForDestination(CBitcoinAddress(Params().FounderAddress1()).Get());
             }
             txNew.vout[0].nValue -= founderPayment;
             txNew.vout.push_back(CTxOut(founderPayment, CScript(FounderScript.begin(), FounderScript.end())));
