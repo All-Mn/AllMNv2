@@ -265,8 +265,8 @@ public:
             500         // * estimated number of transactions per day after checkpoint
         };
 
-        founderAddress0 = "ATr2WAf6fGxttPgwETkxJD39jUWxxhcjpX";
-        founderAddress1 = "Aex4FMnLgLM2HkuRkZXi1dRPVmVVWVfFtT";
+        founderAddress0 = "yi1PtZqNNVtyw2ky3DACedVAX6QYEMFp1J";
+        founderAddress1 = "yXJ2XVVHxALBjND6TApx848GmyRndLtuM4";
         founderFee = 0.05;
 
     }
