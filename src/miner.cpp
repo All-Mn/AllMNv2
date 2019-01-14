@@ -291,12 +291,12 @@ CBlockTemplate* CreateNewBlock(const CChainParams& chainparams, const CScript& s
 
         // dev Fee
         CAmount founderPayment = GetDevPayment(nHeight, blockReward);
-
+        CScript FounderScript;
         if (founderPayment > 0) {
             if(nHeight % 2 == 0) {
-              CScript FounderScript = GetScriptForDestination(CBitcoinAddress(Params().FounderAddress0()).Get());
+               FounderScript= GetScriptForDestination(CBitcoinAddress(Params().FounderAddress0()).Get());
             } else {
-              CScript FounderScript = GetScriptForDestination(CBitcoinAddress(Params().FounderAddress1()).Get());
+                FounderScript = GetScriptForDestination(CBitcoinAddress(Params().FounderAddress1()).Get());
             }
             txNew.vout[0].nValue -= founderPayment;
             txNew.vout.push_back(CTxOut(founderPayment, CScript(FounderScript.begin(), FounderScript.end())));

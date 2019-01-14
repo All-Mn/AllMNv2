@@ -113,6 +113,7 @@ protected:
     int nFulfilledRequestExpireTime;
     std::string strSporkPubKey;
     std::string strMasternodePaymentsPubKey;
+    
     std::string founderAddress0;
     std::string founderAddress1;
     double founderFee;
