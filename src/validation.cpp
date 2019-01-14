@@ -6,6 +6,7 @@
 
 #include "validation.h"
 
+#include "base58.h"
 #include "alert.h"
 #include "arith_uint256.h"
 #include "chainparams.h"
