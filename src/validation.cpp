@@ -1233,6 +1233,10 @@ CAmount GetBlockSubsidy(int nPrevBits, int nPrevHeight, const Consensus::Params&
 
     CAmount nSubsidy = 4 * COIN;
 
+    if (Params().NetworkID() == CBaseChainParams::TESTNET) {
+        if (nHeight < 200) return 250000 * COIN;
+    }
+
     if (nPrevHeight == 0) {
       nSubsidy = 0 * COIN;
     } else if (nPrevHeight == 1) {
@@ -1265,6 +1269,10 @@ CAmount GetMasternodePayment(int nHeight, CAmount blockValue)
 CAmount GetDevPayment(int nHeight, CAmount blockValue)
 {
     CAmount ret;
+    if (Params().NetworkID() == CBaseChainParams::TESTNET) {
+        return ret = (blockValue/100) * 5;
+    }
+
     ret = 0;
     if(nHeight >= 25001) {
       ret = (blockValue/100) * 5;
