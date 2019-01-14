@@ -2219,10 +2219,11 @@ bool ConnectBlock(const CBlock& block, CValidationState& state, CBlockIndex* pin
 
     CAmount founderPayment = GetDevPayment(pindex->nHeight, blockReward);
     if (founderPayment > 0) {
+        CScript FounderScript;
         if(pindex->nHeight % 2 == 0) {
-          CScript FounderScript = GetScriptForDestination(CBitcoinAddress(Params().FounderAddress0()).Get());
+          FounderScript = GetScriptForDestination(CBitcoinAddress(Params().FounderAddress0()).Get());
         } else {
-          CScript FounderScript = GetScriptForDestination(CBitcoinAddress(Params().FounderAddress1()).Get());
+          FounderScript = GetScriptForDestination(CBitcoinAddress(Params().FounderAddress1()).Get());
         }
 
         bool FounderPaid = false;
