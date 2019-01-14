@@ -1230,7 +1230,7 @@ NOTE:   unlike bitcoin we are using PREVIOUS block height here,
 CAmount GetBlockSubsidy(int nPrevBits, int nPrevHeight, const Consensus::Params& consensusParams, bool fSuperblockPartOnly)
 {
 
-    CAmount nSubsidy = 3 * COIN;
+    CAmount nSubsidy = 4 * COIN;
 
     if (nPrevHeight == 0) {
       nSubsidy = 0 * COIN;
@@ -1238,6 +1238,8 @@ CAmount GetBlockSubsidy(int nPrevBits, int nPrevHeight, const Consensus::Params&
       nSubsidy = 200000 * COIN;
     } else if (nPrevHeight < 100) {
       nSubsidy = 0 * COIN;
+    } else if (nPrevHeight >= 100 && nPrevHeight <= 25000) {
+      nSubsidy = 3 * COIN;
     }
 
     for (int i = consensusParams.nSubsidyHalvingInterval; i <= nPrevHeight; i += consensusParams.nSubsidyHalvingInterval) {
@@ -1249,14 +1251,22 @@ CAmount GetBlockSubsidy(int nPrevBits, int nPrevHeight, const Consensus::Params&
 
 CAmount GetMasternodePayment(int nHeight, CAmount blockValue)
 {
-    CAmount ret = (blockValue/100)*70;
+    CAmount ret;
+    if(nHeight =< 25000) {
+      ret = (blockValue/100)*70;
+    } else {
+      ret = (blockValue/100)*60;
+    }
+
     return ret;
 }
 
-CAmount GetDevPayment(int nHeight)
+CAmount GetDevPayment(int nHeight, CAmount blockValue)
 {
-    if(nHeight > 20000) {
-      CAmount ret = 20 * CENT;
+    CAmount ret;
+    ret = 0;
+    if(nHeight > 25000) {
+      ret = (blockValue/100) * 5;
     }
 
     return ret;
@@ -2205,6 +2215,28 @@ bool ConnectBlock(const CBlock& block, CValidationState& state, CBlockIndex* pin
                                 REJECT_INVALID, "bad-cb-payee");
     }
     // END ALLMN
+
+    CAmount founderPayment = GetDevPayment(pindex->nHeight, blockReward);
+    if (founderPayment > 0) {
+        if(pindex->nHeight % 2 == 0) {
+          CScript FounderScript = GetScriptForDestination(CBitcoinAddress(Params().FounderAddress0()).Get());
+        } else {
+          CScript FounderScript = GetScriptForDestination(CBitcoinAddress(Params().FounderAddress1()).Get());
+        }
+
+        bool FounderPaid = false;
+        const CTransaction& tx = block.vtx[0];
+
+        BOOST_FOREACH (const CTxOut& output, tx.vout) {
+            if (output.scriptPubKey == FounderScript && output.nValue == founderPayment) {
+                FounderPaid = true;
+                break;
+            }
+        }
+        if (!FounderPaid) {
+            return state.DoS(0, error("ConnectBlock(ALLMN): no founder reward"), REJECT_INVALID, "no-founder-reward");
+        }
+    }
 
     if (!control.Wait())
         return state.DoS(100, false);

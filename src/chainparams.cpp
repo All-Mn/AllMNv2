@@ -158,6 +158,11 @@ public:
                         //   (the tx=... number in the SetBestChain debug.log lines)
             2800        // * estimated number of transactions per day after checkpoint
         };
+
+        founderAddress0 = "ATr2WAf6fGxttPgwETkxJD39jUWxxhcjpX";
+        founderAddress1 = "Aex4FMnLgLM2HkuRkZXi1dRPVmVVWVfFtT";
+        founderFee = 0.05;
+
     }
 };
 static CMainParams mainParams;
@@ -260,6 +265,10 @@ public:
             500         // * estimated number of transactions per day after checkpoint
         };
 
+        founderAddress0 = "M8CbM4XHV35PsEQKKQBPqbUNaA6u5JLbNU";
+        founderAddress1 = "M8CbM4XHV35PsEQKKQBPqbUNaA6u5JLbNU";
+        founderFee = 0.05;
+
     }
 };
 static CTestNetParams testNetParams;
@@ -345,6 +354,7 @@ public:
             0,
             0
         };
+
         // Regtest ALLMN addresses start with 'y'
         base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1,140);
         // Regtest ALLMN script addresses start with '8' or '9'

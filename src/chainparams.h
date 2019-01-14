@@ -81,6 +81,11 @@ public:
     int PoolMaxTransactions() const { return nPoolMaxTransactions; }
     int FulfilledRequestExpireTime() const { return nFulfilledRequestExpireTime; }
     std::string SporkPubKey() const { return strSporkPubKey; }
+
+    std::string FounderAddress0() const { return founderAddress0; }
+    std::string FounderAddress1() const { return founderAddress1; }
+    double FounderFee() const { return founderFee; }
+
 protected:
     CChainParams() {}
 
@@ -108,6 +113,9 @@ protected:
     int nFulfilledRequestExpireTime;
     std::string strSporkPubKey;
     std::string strMasternodePaymentsPubKey;
+    std::string founderAddress0;
+    std::string founderAddress1;
+    double founderFee;
 };
 
 /**

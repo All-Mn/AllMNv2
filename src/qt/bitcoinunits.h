@@ -57,9 +57,9 @@ public:
      */
     enum Unit
     {
-        ALLMN,
-        mALLMN,
-        uALLMN,
+        ALMN,
+        mALMN,
+        uALMN,
         duffs
     };
 
