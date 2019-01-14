@@ -265,8 +265,8 @@ public:
             500         // * estimated number of transactions per day after checkpoint
         };
 
-        founderAddress0 = "M8CbM4XHV35PsEQKKQBPqbUNaA6u5JLbNU";
-        founderAddress1 = "M8CbM4XHV35PsEQKKQBPqbUNaA6u5JLbNU";
+        founderAddress0 = "ATr2WAf6fGxttPgwETkxJD39jUWxxhcjpX";
+        founderAddress1 = "Aex4FMnLgLM2HkuRkZXi1dRPVmVVWVfFtT";
         founderFee = 0.05;
 
     }
@@ -368,6 +368,10 @@ public:
 
         // Regtest ALLMN BIP44 coin type is '1' (All coin's testnet default)
         nExtCoinType = 1;
+
+        founderAddress0 = "ATr2WAf6fGxttPgwETkxJD39jUWxxhcjpX";
+        founderAddress1 = "Aex4FMnLgLM2HkuRkZXi1dRPVmVVWVfFtT";
+        founderFee = 0.05;
    }
 };
 static CRegTestParams regTestParams;
