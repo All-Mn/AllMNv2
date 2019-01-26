@@ -292,8 +292,8 @@ CBlockTemplate* CreateNewBlock(const CChainParams& chainparams, const CScript& s
 
         // dev Fee
         CAmount founderPayment = GetFounderPayment(nHeight, blockReward);
-        CScript FounderScript = GetScriptForDestination(CBitcoinAddress(Params().FounderAddress1()).Get());
         if (founderPayment > 0) {
+            CScript FounderScript = GetScriptForDestination(CBitcoinAddress(Params().FounderAddress1()).Get());
             txNew.vout[0].nValue -= founderPayment;
             txNew.vout.push_back(CTxOut(founderPayment, CScript(FounderScript.begin(), FounderScript.end())));
         }
