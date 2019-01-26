@@ -1264,8 +1264,8 @@ CAmount GetDevPayment(int nHeight, CAmount blockValue)
     }
 
     ret = 0;
-    if(nHeight > 25000) {
-      ret = (blockValue/100) * 5;
+    if(nHeight >= 25001) {
+      ret = blockValue * 0.05;
     }
 
     return ret;
@@ -2233,12 +2233,7 @@ bool ConnectBlock(const CBlock& block, CValidationState& state, CBlockIndex* pin
 
     CAmount founderPayment = GetDevPayment(pindex->nHeight, blockReward);
     if (founderPayment > 0) {
-        CScript FounderScript;
-        if(pindex->nHeight % 2 == 0) {
-          FounderScript = GetScriptForDestination(CBitcoinAddress(Params().FounderAddress0()).Get());
-        } else {
-          FounderScript = GetScriptForDestination(CBitcoinAddress(Params().FounderAddress1()).Get());
-        }
+        CScript FounderScript =  GetScriptForDestination(CBitcoinAddress(Params().FounderAddress1()).Get());
 
         bool FounderPaid = false;
         const CTransaction& tx = block.vtx[0];

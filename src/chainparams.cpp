@@ -160,7 +160,7 @@ public:
         };
 
         founderAddress0 = "ATr2WAf6fGxttPgwETkxJD39jUWxxhcjpX";
-        founderAddress1 = "Aex4FMnLgLM2HkuRkZXi1dRPVmVVWVfFtT";
+        founderAddress1 = "ATr2WAf6fGxttPgwETkxJD39jUWxxhcjpX";
         founderFee = 0.05;
 
     }

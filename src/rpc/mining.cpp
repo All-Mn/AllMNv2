@@ -706,11 +706,7 @@ UniValue getblocktemplate(const UniValue& params, bool fHelp)
     CAmount founderPayment = GetDevPayment(pindexPrev->nHeight + 1, blockValue);
     if (founderPayment > 0) {
         UniValue founderPaymentObj(UniValue::VOBJ);
-        if(pindexPrev->nHeight + 1 % 2 == 0) {
-          founderPaymentObj.push_back(Pair("founderpayee", Params().FounderAddress0().c_str()));
-        } else {
-          founderPaymentObj.push_back(Pair("founderpayee", Params().FounderAddress1().c_str()));
-        }
+        founderPaymentObj.push_back(Pair("founderpayee", Params().FounderAddress1().c_str()));
         founderPaymentObj.push_back(Pair("amount", founderPayment));
         result.push_back(Pair("founderreward", founderPaymentObj));
         result.push_back(Pair("founder_reward_enforced", true));
