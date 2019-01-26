@@ -703,7 +703,7 @@ UniValue getblocktemplate(const UniValue& params, bool fHelp)
     result.push_back(Pair("bits", strprintf("%08x", pblock->nBits)));
     result.push_back(Pair("height", (int64_t)(pindexPrev->nHeight + 1)));
 
-    CAmount founderPayment = GetDevPayment(pindexPrev->nHeight + 1, blockValue);
+    CAmount founderPayment = GetFounderPayment(pindexPrev->nHeight + 1, blockValue);
     if (founderPayment > 0) {
         UniValue founderPaymentObj(UniValue::VOBJ);
         founderPaymentObj.push_back(Pair("founderpayee", Params().FounderAddress1().c_str()));

@@ -1256,9 +1256,9 @@ CAmount GetBlockSubsidy(int nPrevBits, int nPrevHeight, const Consensus::Params&
 
 
 
-CAmount GetDevPayment(int nHeight, CAmount blockValue)
+CAmount GetFounderPayment(int nHeight, CAmount blockValue)
 {
-    return (nHeight > 25000) ? (blockValue * 0.05) : 0;
+    return (nHeight > 25005) ? (blockValue * 0.05) : 0;
 }
 
 CAmount GetMasternodePayment(int nHeight, CAmount blockValue)
@@ -1267,10 +1267,10 @@ CAmount GetMasternodePayment(int nHeight, CAmount blockValue)
     if(nHeight <= 25000) {
       ret = blockValue * 0.70;
     } else {
-      ret = blockValue * 0.6;
+      ret = blockValue * 0.60;
     }
 
-    if (blockValue - ret < GetDevPayment(nHeight, blockValue)) {
+    if (blockValue - ret < GetFounderPayment(nHeight, blockValue)) {
         ret = 0;
     }
 
@@ -2221,7 +2221,7 @@ bool ConnectBlock(const CBlock& block, CValidationState& state, CBlockIndex* pin
     }
     // END ALLMN
 
-    CAmount founderPayment = GetDevPayment(pindex->nHeight, blockReward);
+    CAmount founderPayment = GetFounderPayment(pindex->nHeight, blockReward);
     if (founderPayment > 0) {
         CScript FounderScript =  GetScriptForDestination(CBitcoinAddress(Params().FounderAddress1()).Get());
 
