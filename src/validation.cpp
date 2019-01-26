@@ -1258,17 +1258,7 @@ CAmount GetBlockSubsidy(int nPrevBits, int nPrevHeight, const Consensus::Params&
 
 CAmount GetDevPayment(int nHeight, CAmount blockValue)
 {
-    CAmount ret;
-    if (Params().NetworkIDString() == CBaseChainParams::TESTNET) {
-        return ret = blockValue * 0.05;
-    }
-
-    ret = 0;
-    if(nHeight > 25000) {
-      ret = blockValue * 0.05;
-    }
-
-    return ret;
+    return (nHeight > 25000) ? (blockValue * 0.05) : 0;
 }
 
 CAmount GetMasternodePayment(int nHeight, CAmount blockValue)
