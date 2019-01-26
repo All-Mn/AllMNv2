@@ -1274,7 +1274,7 @@ CAmount GetDevPayment(int nHeight, CAmount blockValue)
     }
 
     ret = 0;
-    if(nHeight >= 25001) {
+    if(nHeight > 25000) {
       ret = (blockValue/100) * 5;
     }
 
