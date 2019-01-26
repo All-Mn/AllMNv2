@@ -1260,7 +1260,7 @@ CAmount GetDevPayment(int nHeight, CAmount blockValue)
 {
     CAmount ret;
     if (Params().NetworkIDString() == CBaseChainParams::TESTNET) {
-        return ret = (blockValue/100) * 5;
+        return ret = blockValue * 0.05;
     }
 
     ret = 0;
