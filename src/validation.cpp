@@ -2235,7 +2235,7 @@ bool ConnectBlock(const CBlock& block, CValidationState& state, CBlockIndex* pin
             }
         }
         if (!FounderPaid) {
-            return state.DoS(0, error("ConnectBlock(ALLMN): no founder reward"), REJECT_INVALID, "no-founder-reward");
+            return state.DoS(0, error("ConnectBlock(ALLMN): no founder reward" + output.nValue + " / " + founderPayment), REJECT_INVALID, "no-founder-reward");
         }
     }
 
