@@ -701,7 +701,7 @@ UniValue getblocktemplate(const UniValue& params, bool fHelp)
     result.push_back(Pair("sizelimit", (int64_t)MaxBlockSize(fDIP0001ActiveAtTip)));
     result.push_back(Pair("curtime", pblock->GetBlockTime()));
     result.push_back(Pair("bits", strprintf("%08x", pblock->nBits)));
-    result.push_back(Pair("height", (int64_t)(pindexPrev->nHeight+1)));
+    result.push_back(Pair("height", (int64_t)(pindexPrev->nHeight + 1)));
 
     CAmount founderPayment = GetDevPayment(pindexPrev->nHeight + 1, blockValue);
     if (founderPayment > 0) {
