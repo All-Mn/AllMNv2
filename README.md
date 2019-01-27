@@ -1,4 +1,4 @@
-ALLMN Core 2.0.2.3
+ALLMN Core 2.0.2.4
 ===============================
 
 <a href="https://discord.gg/WAr8SEW"><img src="https://discordapp.com/api/guilds/497563353820954636/embed.png" alt="Discord server" /></a>
