@@ -11,7 +11,7 @@ ALLMN Core 2.0.2.4
 | Block Time | `300s` |
 | PoW Block Time | `300s`   |
 | PoW Reward | `3 - 4 ALMN` |
-| Stake Time | `36 hours` |
+| Maturity | `150 blocks` |
 | Masternode Requirement | `2.000 ALMN` |
 | Masternode Reward | `70-60% PoW` |
 | Port | `30500` |
